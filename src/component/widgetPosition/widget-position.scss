@@ -1,0 +1,10 @@
+.card-title {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+        svg {
+            color: blue;
+        }
+    }
+}

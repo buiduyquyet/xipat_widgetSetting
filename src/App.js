@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import Contextual from './component/contextual';
+import { Layout, Page, Text } from '@shopify/polaris';
+import WidgetPosition from './component/widgetPosition';
+import WidgetAppearance from './component/widgetAppearance';
+import WidgetText from './component/widgetText';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const display = useSelector((state) => state.displaySave);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        display ? <Contextual /> : <></>
+      }
+      <Page>
+        <Text variant='heading2xl' as='h2'>Widget Setting</Text>
+        <Layout.Section>
+          <WidgetPosition />
+        </Layout.Section>
+        <Layout.Section>
+          <WidgetAppearance />
+        </Layout.Section>
+        <Layout.Section>
+          <WidgetText />
+        </Layout.Section>
+      </Page>
     </div>
   );
 }

@@ -9,7 +9,7 @@ const initState = {
         calendarLayout: "Calendar layout",
         calendarLanguage: "Iceland",
         calendartFirstDay: "Monday",
-        dateFormat: "",
+        dateFormat: "MM/DD/YY",
         themeColor: "#000000",
         titleColor: "#b11b1b",
         textColorMessage: "#3d8e1a"

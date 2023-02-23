@@ -1,6 +1,7 @@
-import { Card, Checkbox, Collapsible, ColorPicker, DatePicker, Grid, Icon, Select, Stack, Text, TextField } from '@shopify/polaris';
+import { Card, Checkbox, Collapsible, Grid, Icon, Select, Stack, Text, TextField } from '@shopify/polaris';
 import { ChevronDownMinor, PaintBrushMajor } from '@shopify/polaris-icons';
 import axios from 'axios';
+import moment from 'moment/moment';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { activeSave, handleChangeAppearance } from '../../redux/action';
@@ -44,7 +45,18 @@ const WidgetAppearance = () => {
         { label: "Sunday", value: "Sunday" },
     ];
     const optionsLanguage = [];
-    const optionsDate = [];
+    const optionsDateFormat = [
+        { label: moment(Date.now()).format("MM/DD/YY"), value: "MM/DD/YY" },
+        { label: moment(Date.now()).format("DD/MM/YY"), value: "DD/MM/YY" },
+        { label: moment(Date.now()).format("YY/MM/DD"), value: "YY/MM/DD" },
+        { label: moment(Date.now()).format("Month D, Yr"), value: "Month D, Yr" },
+        { label: moment(Date.now()).format("M/D/YY"), value: "M/D/YY" },
+        { label: moment(Date.now()).format("D/M/YY"), value: "D/M/YY" },
+        { label: moment(Date.now()).format("D Month, Yr"), value: "D Month, Yr" },
+        { label: moment(Date.now()).format("Mon DD, YYYY"), value: "Mon DD, YYYY" },
+        { label: moment(Date.now()).format("YYMonDD"), value: "YYMonDD" },
+
+    ];
 
     const [open, setOpen] = useState(true);
     const handleToggle = useCallback(() => setOpen((open) => !open), []);
@@ -88,7 +100,7 @@ const WidgetAppearance = () => {
                                 <Select
                                     label="Layout"
                                     options={optionsLayout}
-                                    onChange={(value) => console.log(value)}
+                                    onChange={(value) => handleChange(value, "layout")}
                                     value={widgetAppearance.layout}
                                 />
                             </Grid.Cell>
@@ -131,7 +143,7 @@ const WidgetAppearance = () => {
                             <Grid.Cell columnSpan={{ xs: 6, sm: 3, md: 3, lg: 6, xl: 6 }}>
                                 <Select
                                     label="Date format"
-                                    options={optionsDate}
+                                    options={optionsDateFormat}
                                     onChange={(value) => handleChange(value, "dateFormat")}
                                     value={widgetAppearance.dateFormat}
                                 />
